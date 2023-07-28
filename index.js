@@ -1,5 +1,6 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
+const bodyParser =  require('body-parser');
 const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
@@ -25,7 +26,7 @@ const customMware = require('./config/middleware');
 // }));
 
 
-app.use(express.urlencoded());
+app.use(bodyParser.urlencoded({extended:true}));
 app.use(cookieParser());
 app.use(express.static('./assets'));
 
