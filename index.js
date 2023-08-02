@@ -1,6 +1,5 @@
 const express = require('express');
 const cookieParser = require('cookie-parser');
-const bodyParser =  require('body-parser');
 const app = express();
 const port = 8000;
 const expressLayouts = require('express-ejs-layouts');
@@ -9,13 +8,11 @@ const db = require('./config/mongoose');
 const session = require('express-session');
 const passport = require('passport');
 const passportLocal = require('./config/passport-local-strategy');
+const passportJWT = require('./config/passport-jwt-strategy');
 const MongoStore = require('connect-mongo')(session);
-// const sassMiddleware = require('sass');
-// const sassMiddleware = require('node-sass-middleware');
+
 const flash = require('connect-flash');
 const customMware = require('./config/middleware');
-
-
 
 // app.use(sassMiddleware({
 //     src: '/assets/scss',
@@ -26,9 +23,16 @@ const customMware = require('./config/middleware');
 // }));
 
 
-app.use(bodyParser.urlencoded({extended:true}));
+app.use(express.urlencoded());
+
 app.use(cookieParser());
+
 app.use(express.static('./assets'));
+
+
+// make the uploads path available to the browser
+app.use('/uploads' , express.static(__dirname + '/uploads'));
+
 
 app.use(expressLayouts);
 
@@ -45,7 +49,7 @@ app.set('views', './views');
 
 // mongo store is used to store the session cookie in the db
 app.use(session({
-    name:'riyaa',
+    name:'codeial',
     //TODO change the secret before deployment in production mode
     secret:'blahsomething',
     saveUnintialized: false,

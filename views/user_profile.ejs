@@ -1,5 +1,11 @@
 <link rel="stylesheet" href="/css/user_profile.css" />
 
+<img
+  src="<%= profile_user.avatar %>"
+  alt="<%= profile_user.name %>"
+  width="100px"
+/>
+
 <h1>Codiel / Profile Page</h1>
 
 <% if(user.id == profile_user.id){ %>
@@ -30,7 +36,7 @@
 
 <%}else{%>
 <!-- else show only the profile info -->
-<p><%= profile_user.name %></p>
-<p><%= profile_user.email %></p>
+<p>Name:<%= profile_user.name %></p>
+<p>Email:<%= profile_user.email %></p>
 
 <%} %>
