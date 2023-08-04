@@ -23,8 +23,11 @@ let posts = await Post.find({})
         path: 'comments',
         populate:{
             path: 'user'
-        }
-    });
+        },
+        populate: {
+            path: 'likes'
+      }
+    }) .populate('likes');
       let users=  await User.find({});
       console.log(posts);
         return res.render('home', {
